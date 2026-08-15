@@ -1,0 +1,178 @@
+MINI AMAZON STORE - STARTUP COMMANDS
+====================================
+
+PROJECT:
+D:\development\mini-amazon-store-minimal
+
+
+====================================
+BACKEND - TERMINAL 1
+====================================
+
+1. Open PowerShell.
+
+2. Run:
+
+cd D:\development\mini-amazon-store-minimal
+
+3. Activate Python environment:
+
+.\.venv\Scripts\Activate.ps1
+
+4. Start the Python/FastAPI backend:
+
+uvicorn backend.main:app --reload
+
+5. Backend should run at:
+
+http://127.0.0.1:8000
+
+6. Test the backend:
+
+http://127.0.0.1:8000
+
+Expected:
+
+{"message":"Mini Amazon Store API is running"}
+
+7. Test products:
+
+http://127.0.0.1:8000/products
+
+Expected products:
+
+iPhone 16
+Galaxy S25
+Pixel 9
+OnePlus 13
+
+IMPORTANT:
+KEEP THIS TERMINAL OPEN.
+DO NOT CLOSE THE BACKEND.
+
+
+====================================
+FRONTEND - TERMINAL 2
+====================================
+
+1. Open a SECOND PowerShell window.
+
+2. Run:
+
+cd D:\development\mini-amazon-store-minimal\frontend
+
+3. Start the frontend:
+
+npm run dev
+
+4. Vite will show something like:
+
+Local: http://localhost:5173/
+
+OR:
+
+Local: http://localhost:5174/
+
+5. Open the URL shown by Vite in your browser.
+
+IMPORTANT:
+KEEP THIS TERMINAL OPEN TOO.
+
+
+====================================
+FIRST TIME ONLY
+====================================
+
+If this is the first time setting up the project:
+
+BACKEND:
+
+cd D:\development\mini-amazon-store-minimal
+
+python -m venv .venv
+
+.\.venv\Scripts\Activate.ps1
+
+cd backend
+
+pip install -r requirements.txt
+
+
+FRONTEND:
+
+cd D:\development\mini-amazon-store-minimal\frontend
+
+npm install
+
+
+After the first setup, you normally DON'T need to repeat
+the installation commands.
+
+
+====================================
+NORMAL DAILY START
+====================================
+
+TERMINAL 1:
+
+cd D:\development\mini-amazon-store-minimal
+
+.\.venv\Scripts\Activate.ps1
+
+uvicorn backend.main:app --reload
+
+
+TERMINAL 2:
+
+cd D:\development\mini-amazon-store-minimal\frontend
+
+npm run dev
+
+
+====================================
+IF FRONTEND SAYS:
+"Could not connect Python API"
+====================================
+
+1. Make sure Terminal 1 is still running.
+
+2. Open:
+
+http://127.0.0.1:8000/products
+
+3. If products appear, the backend is working.
+
+4. Open the frontend URL shown by Vite.
+
+5. If the frontend still cannot connect, check
+backend/main.py for CORS configuration.
+
+
+====================================
+CURRENT API
+====================================
+
+Backend:
+http://127.0.0.1:8000
+
+Products:
+http://127.0.0.1:8000/products
+
+Frontend:
+http://localhost:5173
+OR
+http://localhost:5174
+
+
+====================================
+DO NOT DO THESE EVERY TIME
+====================================
+
+DO NOT create .venv again.
+
+DO NOT run pip install every time.
+
+DO NOT run npm install every time.
+
+Only run installation commands when setting up
+the project for the first time or when dependencies change.
