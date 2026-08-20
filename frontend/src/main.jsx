@@ -134,104 +134,106 @@ function App() {
       )}
 
       {/* Products */}
-      {!selectedProduct && (
-        <>
-          <section className="products">
+      <div className="store-layout">
 
-            {filtered.map(p => (
-              <article key={p.id}>
+  {/* Products */}
+  <section className="products">
 
-                <h2
-                  onClick={() => setSelectedProduct(p)}
-                  style={{ cursor: "pointer" }}
-                >
-                  {p.name}
-                </h2>
+    {filtered.map(p => (
+      <article key={p.id}>
 
-                <p>{p.brand}</p>
+        <h2
+          onClick={() => setSelectedProduct(p)}
+          style={{ cursor: "pointer" }}
+        >
+          {p.name}
+        </h2>
 
-                <strong>${p.price}</strong>
+        <p>{p.brand}</p>
 
-                <br />
+        <strong>${p.price}</strong>
 
-                <button
-                  onClick={() => addToCart(p)}
-                >
-                  Add to Cart
-                </button>
+        <br />
 
-                <button
-                  onClick={() => setSelectedProduct(p)}
-                >
-                  View Details
-                </button>
+        <button onClick={() => addToCart(p)}>
+          Add to Cart
+        </button>
 
-              </article>
-            ))}
+        <button onClick={() => setSelectedProduct(p)}>
+          View Details
+        </button>
 
-          </section>
+      </article>
+    ))}
 
-          {/* Cart */}
-          <section className="cart-section">
+  </section>
 
-            <h2>🛒 Shopping Cart</h2>
+  {/* Right-side Cart */}
+  <aside className="cart-section">
 
-            {cart.length === 0 ? (
-              <p>Your cart is empty.</p>
-            ) : (
-              <>
-                {cart.map(item => (
-                  <div key={item.id} className="cart-item">
+    <h2>🛒 Shopping Cart ({cartCount})</h2>
 
-                    <h3>{item.name}</h3>
+    {cart.length === 0 ? (
+      <p>Your cart is empty.</p>
+    ) : (
+      <>
+        {cart.map(item => (
+          <div key={item.id} className="cart-item">
 
-                    <p>${item.price}</p>
+            <h3>{item.name}</h3>
 
-                    <div>
-                      <button
-                        onClick={() =>
-                          changeQuantity(item.id, -1)
-                        }
-                      >
-                        -
-                      </button>
+            <p>{item.brand}</p>
 
-                      <span> {item.quantity} </span>
+            <p>${item.price}</p>
 
-                      <button
-                        onClick={() =>
-                          changeQuantity(item.id, 1)
-                        }
-                      >
-                        +
-                      </button>
-                    </div>
+            <div className="quantity">
 
-                    <p>
-                      Item Total: $
-                      {(item.price * item.quantity).toFixed(2)}
-                    </p>
+              <button
+                onClick={() => changeQuantity(item.id, -1)}
+              >
+                −
+              </button>
 
-                    <button
-                      onClick={() => removeFromCart(item.id)}
-                    >
-                      Remove
-                    </button>
+              <span>{item.quantity}</span>
 
-                  </div>
-                ))}
+              <button
+                onClick={() => changeQuantity(item.id, 1)}
+              >
+                +
+              </button>
 
-                <h2>
-                  Cart Total: ${cartTotal.toFixed(2)}
-                </h2>
-              </>
-            )}
+            </div>
 
-          </section>
-        </>
-      )}
+            <p>
+              Item Total: $
+              {(item.price * item.quantity).toFixed(2)}
+            </p>
 
-    </main>
+            <button
+              className="remove-button"
+              onClick={() => removeFromCart(item.id)}
+            >
+              Remove
+            </button>
+
+          </div>
+        ))}
+
+        <div className="cart-total">
+          <h2>Cart Total</h2>
+          <h2>${cartTotal.toFixed(2)}</h2>
+
+          <button className="checkout-button">
+            Checkout
+          </button>
+        </div>
+      </>
+    )}
+
+  </aside>
+
+  </div>
+  </main>
   );
 }
 
