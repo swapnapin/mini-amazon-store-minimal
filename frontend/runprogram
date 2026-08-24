@@ -1,0 +1,88 @@
+import subprocess
+import os
+import time
+import webbrowser
+
+
+print("Enter your name or press x to exit:")
+b = input()
+
+if b.lower() == "x":
+    print("Exiting the program.")
+    exit()
+
+print("Hello, " + b + "! Welcome to the program.")
+print("Would you like to run the website?")
+
+c = input()
+
+if c.lower() == "yes":
+
+    print("RUNNING THE WEBSITE")
+
+    # Main project folder
+    project_folder = r"D:\development\mini-amazon-store-minimal"
+
+    # Backend
+    backend_folder = os.path.join(
+        project_folder,
+        "backend"
+    )
+
+    # Frontend
+    frontend_folder = os.path.join(
+        project_folder,
+        "frontend"
+    )
+
+    # Python inside virtual environment
+    python_exe = os.path.join(
+        project_folder,
+        ".venv",
+        "Scripts",
+        "python.exe"
+    )
+
+    print("Project folder:", project_folder)
+    print("Backend folder:", backend_folder)
+    print("Frontend folder:", frontend_folder)
+    print("Python:", python_exe)
+
+    # -------------------------
+    # Start FastAPI Backend
+    # -------------------------
+
+    subprocess.Popen(
+        [
+            python_exe,
+            "-m",
+            "uvicorn",
+            "backend.main:app",
+            "--reload"
+        ],
+        cwd=project_folder
+    )
+
+    print("FastAPI backend started!")
+
+    # -------------------------
+    # Start React/Vite Frontend
+    # -------------------------
+
+    subprocess.Popen(
+        ["npm", "run", "dev"],
+        cwd=frontend_folder,
+        shell=True
+    )
+
+    print("React/Vite frontend started!")
+
+    print()
+    print("Backend:  http://127.0.0.1:8000")
+    print("Frontend: http://localhost:5173")
+
+    # Open the frontend in the default web browser
+    webbrowser.open("http://localhost:5173")
+
+else:
+    print("Exiting the program.")
