@@ -3,3 +3,14 @@ __pycache__/
 *.pyc
 node_modules/
 .env
+.env.*
+!.env.example
+.pytest_cache/
+.ruff_cache/
+coverage/
+htmlcov/
+test-results/
+playwright-report/
+frontend/dist/
+*.db-shm
+*.db-wal

@@ -1,0 +1,19 @@
+from fastapi import APIRouter, Depends
+from sqlalchemy import text
+from sqlalchemy.orm import Session
+
+from ..database import get_db
+
+
+router = APIRouter(tags=["health"])
+
+
+@router.get("/")
+def home() -> dict[str, str]:
+    return {"message": "Mini Amazon Store API is running"}
+
+
+@router.get("/health")
+def health(db: Session = Depends(get_db)) -> dict[str, str]:
+    db.execute(text("SELECT 1"))
+    return {"status": "ok"}
