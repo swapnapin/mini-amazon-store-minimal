@@ -1,0 +1,31 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      APP_ENV: production
+      DATABASE_URL: sqlite:////data/products.db
+      CORS_ORIGINS: http://localhost:8080
+      DEMO_USERNAME: ${DEMO_USERNAME:-testuser}
+      DEMO_PASSWORD: ${DEMO_PASSWORD:?Set DEMO_PASSWORD in your environment}
+      SMTP_HOST: ${SMTP_HOST:-smtp.gmail.com}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_EMAIL: ${SMTP_EMAIL:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+    volumes:
+      - store-data:/data
+    restart: unless-stopped
+
+  web:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    depends_on:
+      - api
+    ports:
+      - "8080:80"
+    restart: unless-stopped
+
+volumes:
+  store-data:
